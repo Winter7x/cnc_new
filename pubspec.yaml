@@ -1,20 +1,32 @@
 name: cnc_app
-description: "A new Flutter project."
-publish_to: 'none'
+description: "A new Flutter project for CNC applications."
+
+# The following defines the project's current version.
+# Format: major.minor.patch+build
 version: 0.1.0+57
 
+# Specifies the Dart SDK version compatibility.
 environment:
-  sdk: ^3.5.4
+  sdk: ">=3.0.0 <4.0.0"
 
+# Project dependencies.
 dependencies:
   flutter:
     sdk: flutter
-  data_table_2: ^2.5.18
-  
+  data_table_2: ^2.5.18 # Enhanced data tables for Flutter
+  syncfusion_flutter_pdfviewer: ^20.4.49 # PDF Viewer package
+
+# Development dependencies.
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
+    sdk: flutter # Testing framework for Flutter
+  flutter_lints: ^4.0.0 # Linting rules for code quality
 
+# Flutter-specific configuration.
 flutter:
   uses-material-design: true
+
+  # Asset declarations for the project. Includes all files in the assets folder.
+  assets:
+    - assets/ # This will include all files and subdirectories in the assets folder
+

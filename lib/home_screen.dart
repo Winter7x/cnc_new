@@ -1,6 +1,10 @@
 import 'package:cnc_app/g_code.dart';
 import 'package:flutter/material.dart';
 import 'g_turning.dart';
+import 'm_mill.dart';
+import 'M_turning.dart';
+import 'guide1.dart';
+import 'calculations/feed.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,130 +19,205 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.teal,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'G/M Codes',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'G/M Codes',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              _buildTile(
-                context,
-                icon: Icons.abc_rounded,
-                label: 'G code Milling',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
-              ),
-              _buildTile(
-                context,
-                icon: Icons.book,
-                label: 'G code Turning',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GTurning(),
-                    ),
-                  );
-                },
-              ),
-              _buildTile(
-                context,
-                icon: Icons.dashboard,
-                label: 'M code milling',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
-              ),
-              _buildTile(
-                context,
-                icon: Icons.lightbulb,
-                label: 'M code Turning',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          const Divider(),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Guide',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildTile(
+                  context,
+                  icon: Icons.abc_rounded,
+                  label: 'G code Milling',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => g_code(),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.book,
+                  label: 'G code Turning',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GTurning(),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.dashboard,
+                  label: 'M code milling',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Mmilling(),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.lightbulb,
+                  label: 'M code Turning',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Mturning(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-          ),
-          GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              _buildTile(
-                context,
-                icon: Icons.apps,
-                label: 'Basic CNC',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
+            const Divider(),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Guide',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              _buildTile(
-                context,
-                icon: Icons.build,
-                label: 'Advanced',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
+            ),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildTile(
+                  context,
+                  icon: Icons.apps,
+                  label: 'Fundamentals of CNC',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Guide1(pdfPath: 'assets/FundamentalsOfCNC.pdf'),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.build,
+                  label: 'Basics',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Guide1(pdfPath: 'assets/Basic Guide for engg.pdf'),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            const Divider(),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Calculator',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              _buildTile(
-                context,
-                icon: Icons.developer_mode,
-                label: 'Extra Advance',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => g_code(),
-                    ),
-                  );
-                },
+            ),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildTile(
+                  context,
+                  icon: Icons.lightbulb,
+                  label: 'M code Turning',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CNCCalculationsfeed(),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.lightbulb,
+                  label: 'M code Turning',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Mturning(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            const Divider(),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Threads Charts',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-            ],
-          ),
-        ],
+            ),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildTile(
+                  context,
+                  icon: Icons.apps,
+                  label: 'Fundamentals of CNC',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Guide1(pdfPath: 'assets/FundamentalsOfCNC.pdf'),
+                      ),
+                    );
+                  },
+                ),
+                _buildTile(
+                  context,
+                  icon: Icons.build,
+                  label: 'Advanced',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Guide1(pdfPath: 'assets/Basic Guide for engg.pdf'),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
