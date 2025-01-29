@@ -1,5 +1,6 @@
-import 'package:cnc_app/qna_screen.dart';
+import 'package:cnc_app/g_code.dart';
 import 'package:flutter/material.dart';
+import 'g_turning.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => GTurning(),
                     ),
                   );
                 },
@@ -63,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
@@ -76,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
@@ -104,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
@@ -130,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QnaScreen(),
+                      builder: (context) => g_code(),
                     ),
                   );
                 },
