@@ -3,7 +3,7 @@ description: "A new Flutter project for CNC applications."
 
 # The following defines the project's current version.
 # Format: major.minor.patch+build
-version: 0.1.0+57
+version: 0.1.0+59
 
 # Specifies the Dart SDK version compatibility.
 environment:
@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   data_table_2: ^2.5.18 # Enhanced data tables for Flutter
-  syncfusion_flutter_pdfviewer: ^20.4.49 # PDF Viewer package
+  syncfusion_flutter_pdfviewer: ^28.1.41 # PDF Viewer package
 
 # Development dependencies.
 dev_dependencies:

@@ -1,10 +1,8 @@
-import 'package:cnc_app/g_code.dart';
 import 'package:flutter/material.dart';
-import 'g_turning.dart';
-import 'm_mill.dart';
-import 'M_turning.dart';
-import 'guide1.dart';
-import 'calculations/feed.dart';
+import 'package:cnc_app/gmcodes/codesmain.dart';
+import 'guide/guidemain.dart'; // Import GuideMain
+import 'calculations/00calcscreen.dart'; // Import CNCCalculationsfeed
+import 'Threads/_00ThreadMain.dart'; // Import the new Threads screen
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,238 +18,113 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.teal,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'G/M Codes',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              _buildTile(
+                context,
+                icon: Icons.code,
+                label: 'Codes',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CodesScreen(),
+                    ),
+                  );
+                },
               ),
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _buildTile(
-                  context,
-                  icon: Icons.abc_rounded,
-                  label: 'G code Milling',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => g_code(),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.book,
-                  label: 'G code Turning',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GTurning(),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.dashboard,
-                  label: 'M code milling',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mmilling(),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.lightbulb,
-                  label: 'M code Turning',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mturning(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            const Divider(),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Guide',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              _buildTile(
+                context,
+                icon: Icons.menu_book,
+                label: 'Guides',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const GuidesScreen(),
+                    ),
+                  );
+                },
               ),
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _buildTile(
-                  context,
-                  icon: Icons.apps,
-                  label: 'Fundamentals of CNC',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Guide1(pdfPath: 'assets/FundamentalsOfCNC.pdf'),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.build,
-                  label: 'Basics',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Guide1(pdfPath: 'assets/Basic Guide for engg.pdf'),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            const Divider(),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Calculator',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              _buildTile(
+                context,
+                icon: Icons.calculate,
+                label: 'Calulator',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CNCCalculationsfeed(),
+                    ),
+                  );
+                },
               ),
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _buildTile(
-                  context,
-                  icon: Icons.lightbulb,
-                  label: 'M code Turning',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CNCCalculationsfeed(),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.lightbulb,
-                  label: 'M code Turning',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mturning(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            const Divider(),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Threads Charts',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              _buildTile(
+                context,
+                icon: Icons.timeline,
+                label: 'Threads',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ThreadsScreen(),
+                    ),
+                  );
+                },
               ),
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _buildTile(
-                  context,
-                  icon: Icons.apps,
-                  label: 'Fundamentals of CNC',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Guide1(pdfPath: 'assets/FundamentalsOfCNC.pdf'),
-                      ),
-                    );
-                  },
-                ),
-                _buildTile(
-                  context,
-                  icon: Icons.build,
-                  label: 'Advanced',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Guide1(pdfPath: 'assets/Basic Guide for engg.pdf'),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTile(BuildContext context,
-      {required IconData icon,
-      required String label,
-      TextStyle? labelStyle, // Added parameter for custom text style
-      required VoidCallback onTap}) {
+  Widget _buildTile(BuildContext context, {IconData? icon, String? letter, required String label, TextStyle? labelStyle, required VoidCallback onTap}) {
     return InkWell(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Icon(icon, size: 36, color: Colors.teal),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: labelStyle ?? // Use custom style if provided
-                const TextStyle(
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
-                  height: 1.2,
+          Row(
+            children: [
+              Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: icon != null
+                      ? Icon(icon, size: 36, color: Colors.teal)
+                      : Text(
+                          letter ?? '',
+                          style: const TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal,
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(width: 8), // Space between icon and label
+              Expanded(
+                // Use Expanded to allow label to take remaining space
+                child: Text(
+                  label,
+                  style: labelStyle ??
+                      const TextStyle(
+                        fontSize: 16, // Increased font size for better visibility
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                  textAlign: TextAlign.start, // Align text to start
+                ),
+              ),
+            ],
           ),
+          const SizedBox(height: 16), // Space between tiles
         ],
       ),
     );
