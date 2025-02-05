@@ -3,6 +3,7 @@ import 'package:cnc_app/gmcodes/codesmain.dart';
 import 'guide/guidemain.dart'; // Import GuideMain
 import 'calculations/00calcscreen.dart'; // Import CNCCalculationsfeed
 import 'Threads/_00ThreadMain.dart'; // Import the new Threads screen
+// ... other imports ...
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,66 +14,55 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'CNC APP',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.2,
+          ),
         ),
-        backgroundColor: Colors.teal,
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        elevation: 8,
+        shadowColor: Colors.blueAccent.withOpacity(0.3),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: Column(
             children: [
               _buildTile(
                 context,
                 icon: Icons.code,
                 label: 'Codes',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CodesScreen(),
-                    ),
-                  );
-                },
+                color: Colors.blue,
+                onTap: () => _navigateTo(context, const CodesScreen()),
               ),
               _buildTile(
                 context,
                 icon: Icons.menu_book,
                 label: 'Guides',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const GuidesScreen(),
-                    ),
-                  );
-                },
+                color: Colors.green,
+                onTap: () => _navigateTo(context, const GuidesScreen()),
               ),
               _buildTile(
                 context,
                 icon: Icons.calculate,
-                label: 'Calulator',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CNCCalculationsfeed(),
-                    ),
-                  );
-                },
+                label: 'Calculator',
+                color: Colors.orange,
+                onTap: () => _navigateTo(context, CNCCalculationsfeed()),
               ),
               _buildTile(
                 context,
-                icon: Icons.timeline,
+                icon: Icons.handyman,
                 label: 'Threads',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ThreadsScreen(),
-                    ),
-                  );
-                },
+                color: Colors.purple,
+                onTap: () => _navigateTo(context, const ThreadsScreen()),
               ),
             ],
           ),
@@ -81,51 +71,85 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(BuildContext context, {IconData? icon, String? letter, required String label, TextStyle? labelStyle, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Card(
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: icon != null
-                      ? Icon(icon, size: 36, color: Colors.teal)
-                      : Text(
-                          letter ?? '',
-                          style: const TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.teal,
-                          ),
-                        ),
-                ),
+  Widget _buildTile(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Material(
+        elevation: 4,
+        borderRadius: BorderRadius.circular(15),
+        shadowColor: color.withOpacity(0.2),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(15),
+          splashColor: color.withOpacity(0.1),
+          hoverColor: color.withOpacity(0.05),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: Colors.grey.shade200,
+                width: 1,
               ),
-              const SizedBox(width: 8), // Space between icon and label
-              Expanded(
-                // Use Expanded to allow label to take remaining space
-                child: Text(
-                  label,
-                  style: labelStyle ??
-                      const TextStyle(
-                        fontSize: 16, // Increased font size for better visibility
-                        fontWeight: FontWeight.bold,
-                        height: 1.2,
-                      ),
-                  textAlign: TextAlign.start, // Align text to start
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 32,
+                    color: color,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade800,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 18,
+                  color: Colors.grey.shade400,
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 16), // Space between tiles
-        ],
+        ),
+      ),
+    );
+  }
+
+  void _navigateTo(BuildContext context, Widget screen) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (_, __, ___) => screen,
+        transitionsBuilder: (_, animation, __, child) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
       ),
     );
   }

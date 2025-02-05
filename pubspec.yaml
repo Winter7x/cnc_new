@@ -3,7 +3,7 @@ description: "A new Flutter project for CNC applications."
 
 # The following defines the project's current version.
 # Format: major.minor.patch+build
-version: 0.1.0+59
+version: 11.0.0+61
 
 # Specifies the Dart SDK version compatibility.
 environment:
@@ -21,6 +21,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter # Testing framework for Flutter
   flutter_lints: ^4.0.0 # Linting rules for code quality
+  flutter_launcher_icons: ^0.13.1 # App icon generator
 
 # Flutter-specific configuration.
 flutter:
@@ -30,3 +31,7 @@ flutter:
   assets:
     - assets/ # This will include all files and subdirectories in the assets folder
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_icon.png"

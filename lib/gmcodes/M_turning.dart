@@ -27,30 +27,22 @@ class Mturning extends StatelessWidget {
               ), // Add borders to all cells
               columns: const [
                 DataColumn2(
-                  label: Text('Code',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
+                  label: Text('Code', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
                   fixedWidth: 50, // Set fixed width for the Code column
                 ),
                 DataColumn2(
-                  label: Text('Category',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
-                  fixedWidth: 90, // Set fixed width for the Category column
+                  label: Text('Category', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+                  fixedWidth: 100, // Set fixed width for the Category column
                 ),
                 DataColumn2(
-                  label: Text('Function',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
+                  label: Text('Function', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
                   size: ColumnSize.L, // Set as large column for wrapping
                 ),
               ],
-              rows: _buildDataRows(
-                  smallerTextStyle), // Reference to the dynamic data rows builder
-              headingRowColor:
-                  MaterialStateColor.resolveWith((states) => Colors.grey[200]!),
+              rows: _buildDataRows(smallerTextStyle), // Reference to the dynamic data rows builder
+              headingRowColor: MaterialStateColor.resolveWith((states) => Colors.grey[200]!),
               headingRowHeight: 56.0,
-              dataRowHeight: null, // Set to null to allow flexible height
+              dataRowHeight: 40, // Set to null to allow flexible height
               showCheckboxColumn: false,
             ),
           ),
@@ -62,7 +54,11 @@ class Mturning extends StatelessWidget {
   // Method to build data rows dynamically
   List<DataRow> _buildDataRows(TextStyle textStyle) {
     const List<Map<String, String>> data = [
-      {"Code": "M00", "Category": "Miscellaneous", "Function": "Program Stop"},
+      {
+        "Code": "M00",
+        "Category": "Miscellaneous",
+        "Function": "Program Stop"
+      },
       {
         "Code": "M01",
         "Category": "Miscellaneous",
@@ -88,13 +84,21 @@ class Mturning extends StatelessWidget {
         "Category": "Spindle Control",
         "Function": "Spindle Stop"
       },
-      {"Code": "M06", "Category": "Tool Change", "Function": "Tool Change"},
+      {
+        "Code": "M06",
+        "Category": "Tool Change",
+        "Function": "Tool Change"
+      },
       {
         "Code": "M08",
         "Category": "Coolant Control",
         "Function": "Coolant ON (Flood or Mist)"
       },
-      {"Code": "M09", "Category": "Coolant Control", "Function": "Coolant OFF"},
+      {
+        "Code": "M09",
+        "Category": "Coolant Control",
+        "Function": "Coolant OFF"
+      },
       {
         "Code": "M10",
         "Category": "Clamping Control",
@@ -115,7 +119,11 @@ class Mturning extends StatelessWidget {
         "Category": "Gear Selection",
         "Function": "Select Gear (for machines with multiple speeds)"
       },
-      {"Code": "M42", "Category": "Gear Selection", "Function": "Gear OFF"},
+      {
+        "Code": "M42",
+        "Category": "Gear Selection",
+        "Function": "Gear OFF"
+      },
       {
         "Code": "M48",
         "Category": "Miscellaneous",
@@ -156,13 +164,19 @@ class Mturning extends StatelessWidget {
     return data.map((row) {
       return DataRow(cells: [
         DataCell(Wrap(
-          children: [Text(row['Code']!, style: textStyle)],
+          children: [
+            Text(row['Code']!, style: textStyle)
+          ],
         )),
         DataCell(Wrap(
-          children: [Text(row['Category']!, style: textStyle)],
+          children: [
+            Text(row['Category']!, style: textStyle)
+          ],
         )),
         DataCell(Wrap(
-          children: [Text(row['Function']!, style: textStyle)],
+          children: [
+            Text(row['Function']!, style: textStyle)
+          ],
         )),
       ]);
     }).toList();
