@@ -10,27 +10,68 @@ class CodesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Remove debug ribbon
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
             'Codes',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
           ),
-          backgroundColor: Colors.teal,
+          centerTitle: true, // Center the title
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.teal,
+                  Colors.indigo
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pop(); // Navigate back
+            },
+          ),
         ),
         body: Container(
-          padding: const EdgeInsets.all(16.0), // Padding around the grid
+          padding: const EdgeInsets.all(16.0),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.white,
+                Color(0xFFE0F7FA)
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
           child: GridView.count(
             crossAxisCount: 2,
-            crossAxisSpacing: 16, // Space between columns
-            mainAxisSpacing: 16, // Space between rows
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
             children: [
               _buildTile(
                 context,
                 icon: Icons.code,
                 letter: 'G',
-                label: 'G code Milling',
+                label: 'G Code Milling',
                 color: Colors.teal[100]!,
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.teal,
+                    Colors.indigo
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -44,8 +85,16 @@ class CodesScreen extends StatelessWidget {
                 context,
                 icon: Icons.code,
                 letter: 'G',
-                label: 'G code Turning',
+                label: 'G Code Turning',
                 color: Colors.teal[200]!,
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.indigo,
+                    Colors.purple
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -59,8 +108,16 @@ class CodesScreen extends StatelessWidget {
                 context,
                 icon: Icons.build,
                 letter: 'M',
-                label: 'M code Milling',
+                label: 'M Code Milling',
                 color: Colors.amber[100]!,
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.orange,
+                    Colors.deepOrange
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -74,8 +131,16 @@ class CodesScreen extends StatelessWidget {
                 context,
                 icon: Icons.build,
                 letter: 'M',
-                label: 'M code Turning',
+                label: 'M Code Turning',
                 color: Colors.amber[200]!,
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.pink,
+                    Colors.purple
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -92,37 +157,60 @@ class CodesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(BuildContext context, {IconData? icon, String? letter, required String label, required Color color, required VoidCallback onTap}) {
+  Widget _buildTile(
+    BuildContext context, {
+    IconData? icon,
+    String? letter,
+    required String label,
+    required Color color,
+    Gradient? gradient,
+    required VoidCallback onTap,
+  }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(15), // Rounded tap area
-      child: Card(
-        elevation: 8, // Increased elevation for better shadow effect
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(20),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: gradient,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-        color: color, // Set card background color
         child: Padding(
-          padding: const EdgeInsets.all(16.0), // More padding inside card
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (icon != null)
-                Icon(icon, size: 48, color: Colors.teal) // Larger icon size
-              else
+                Icon(
+                  icon,
+                  size: 48,
+                  color: Colors.white,
+                ),
+              if (icon == null)
                 Text(
                   letter ?? '',
                   style: const TextStyle(
-                    fontSize: 48, // Increased font size for letter
+                    fontSize: 48,
                     fontWeight: FontWeight.bold,
-                    color: Colors.teal,
+                    color: Colors.white,
                   ),
                 ),
               const SizedBox(height: 8),
               Text(
                 label,
-                textAlign: TextAlign.center, // Center align text
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),

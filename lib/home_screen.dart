@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cnc_app/gmcodes/codesmain.dart';
-import 'guide/guidemain.dart'; // Import GuideMain
-import 'calculations/00calcscreen.dart'; // Import CNCCalculationsfeed
-import 'Threads/_00ThreadMain.dart'; // Import the new Threads screen
-// ... other imports ...
+import 'package:cnc_app/gmcodes/codesmain.dart'; // Import CodesScreen
+import 'package:cnc_app/guide/guidemain.dart'; // Import GuidesScreen
+import 'package:cnc_app/calculations/00calcscreen.dart'; // Import CNCCalculationsfeed
+import 'package:cnc_app/Threads/_00ThreadMain.dart'; // Import ThreadsScreen
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,7 +21,18 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blueAccent,
+                Colors.indigo
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         elevation: 8,
         shadowColor: Colors.blueAccent.withOpacity(0.3),
         shape: const RoundedRectangleBorder(

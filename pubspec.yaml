@@ -3,7 +3,7 @@ description: "A new Flutter project for CNC applications."
 
 # The following defines the project's current version.
 # Format: major.minor.patch+build
-version: 11.0.0+61
+version: 11.0.0+62
 
 # Specifies the Dart SDK version compatibility.
 environment:

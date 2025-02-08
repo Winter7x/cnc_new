@@ -11,50 +11,74 @@ class GTurning extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Applications'),
-      ),
-      body: Column(
-        children: [
-          Flexible(
-            child: DataTable2(
-              columnSpacing: 10, // Reduced spacing between columns
-              horizontalMargin: 12,
-              minWidth: 250,
-              border: TableBorder.all(
-                color: Colors.grey,
-                width: 1,
-                style: BorderStyle.solid,
-              ), // Add borders to all cells
-              columns: const [
-                DataColumn2(
-                  label: Text('Code',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
-                  fixedWidth: 50, // Set fixed width for the Code column
-                ),
-                DataColumn2(
-                  label: Text('Category',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
-                  fixedWidth: 90, // Set fixed width for the Category column
-                ),
-                DataColumn2(
-                  label: Text('Function',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
-                  size: ColumnSize.L, // Set as large column for wrapping
-                ),
+        title: const Text(
+          'G code Turning',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.teal,
+                Colors.indigo
               ],
-              rows: _buildDataRows(
-                  smallerTextStyle), // Reference to the dynamic data rows builder
-              headingRowColor:
-                  MaterialStateColor.resolveWith((states) => Colors.grey[200]!),
-              headingRowHeight: 56.0,
-              dataRowHeight: null, // Set to null to allow flexible height
-              showCheckboxColumn: false,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
-        ],
+        ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.white,
+              Color(0xFFE0F7FA)
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          children: [
+            Flexible(
+              child: DataTable2(
+                columnSpacing: 10, // Reduced spacing between columns
+                horizontalMargin: 12,
+                minWidth: 250,
+                border: TableBorder.all(
+                  color: Colors.grey,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), // Add borders to all cells
+                columns: const [
+                  DataColumn2(
+                    label: Text('Code', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+                    fixedWidth: 50, // Set fixed width for the Code column
+                  ),
+                  DataColumn2(
+                    label: Text('Category', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+                    fixedWidth: 90, // Set fixed width for the Category column
+                  ),
+                  DataColumn2(
+                    label: Text('Function', textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+                    size: ColumnSize.L, // Set as large column for wrapping
+                  ),
+                ],
+                rows: _buildDataRows(smallerTextStyle), // Reference to the dynamic data rows builder
+                headingRowColor: MaterialStateColor.resolveWith((states) => Colors.grey[200]!),
+                headingRowHeight: 56.0,
+                dataRowHeight: null, // Set to null to allow flexible height
+                showCheckboxColumn: false,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -70,8 +94,7 @@ class GTurning extends StatelessWidget {
       {
         "Code": "G01",
         "Category": "Motion",
-        "Function":
-            "Move in a straight line at last speed commanded by a (F)eedrate"
+        "Function": "Move in a straight line at last speed commanded by a (F)eedrate"
       },
       {
         "Code": "G02",
@@ -88,15 +111,31 @@ class GTurning extends StatelessWidget {
         "Category": "Motion",
         "Function": "Dwell: Stop for a specified time."
       },
-      {"Code": "G09", "Category": "Motion", "Function": "Exact stop check"},
+      {
+        "Code": "G09",
+        "Category": "Motion",
+        "Function": "Exact stop check"
+      },
       {
         "Code": "G10",
         "Category": "Compensation",
         "Function": "Programmable parameter input"
       },
-      {"Code": "G17", "Category": "Coordinate", "Function": "Select X-Y plane"},
-      {"Code": "G18", "Category": "Coordinate", "Function": "Select X-Z plane"},
-      {"Code": "G19", "Category": "Coordinate", "Function": "Select Y-Z plane"},
+      {
+        "Code": "G17",
+        "Category": "Coordinate",
+        "Function": "Select X-Y plane"
+      },
+      {
+        "Code": "G18",
+        "Category": "Coordinate",
+        "Function": "Select X-Z plane"
+      },
+      {
+        "Code": "G19",
+        "Category": "Coordinate",
+        "Function": "Select Y-Z plane"
+      },
       {
         "Code": "G20",
         "Category": "Coordinate",
@@ -130,8 +169,7 @@ class GTurning extends StatelessWidget {
       {
         "Code": "G32",
         "Category": "Canned",
-        "Function":
-            "Constant lead threading (like G01 synchronized with spindle)"
+        "Function": "Constant lead threading (like G01 synchronized with spindle)"
       },
       {
         "Code": "G40",
@@ -176,8 +214,7 @@ class GTurning extends StatelessWidget {
       {
         "Code": "G52",
         "Category": "Coordinate",
-        "Function":
-            "Local workshift for all coordinate systems: add XYZ offsets"
+        "Function": "Local workshift for all coordinate systems: add XYZ offsets"
       },
       {
         "Code": "G53",
@@ -214,41 +251,101 @@ class GTurning extends StatelessWidget {
         "Category": "Coordinate",
         "Function": "Work coordinate system (6th Workpiece)"
       },
-      {"Code": "G61", "Category": "Other", "Function": "Exact stop check mode"},
+      {
+        "Code": "G61",
+        "Category": "Other",
+        "Function": "Exact stop check mode"
+      },
       {
         "Code": "G62",
         "Category": "Other",
         "Function": "Automatic corner override"
       },
-      {"Code": "G63", "Category": "Other", "Function": "Tapping mode"},
-      {"Code": "G64", "Category": "Other", "Function": "Best speed path"},
+      {
+        "Code": "G63",
+        "Category": "Other",
+        "Function": "Tapping mode"
+      },
+      {
+        "Code": "G64",
+        "Category": "Other",
+        "Function": "Best speed path"
+      },
       {
         "Code": "G65",
         "Category": "Other",
         "Function": "Custom macro simple call"
       },
-      {"Code": "G70", "Category": "Canned", "Function": "Finish Turning Cycle"},
-      {"Code": "G71", "Category": "Canned", "Function": "Rough Turning Cycle"},
-      {"Code": "G72", "Category": "Canned", "Function": "Rough Facing Cycle"},
+      {
+        "Code": "G70",
+        "Category": "Canned",
+        "Function": "Finish Turning Cycle"
+      },
+      {
+        "Code": "G71",
+        "Category": "Canned",
+        "Function": "Rough Turning Cycle"
+      },
+      {
+        "Code": "G72",
+        "Category": "Canned",
+        "Function": "Rough Facing Cycle"
+      },
       {
         "Code": "G73",
         "Category": "Canned",
         "Function": "Pattern Repeating Cycle"
       },
-      {"Code": "G74", "Category": "Canned", "Function": "Peck Drilling Cycle"},
-      {"Code": "G75", "Category": "Canned", "Function": "Grooving Cycle"},
-      {"Code": "G76", "Category": "Canned", "Function": "Threading Cycle"},
-      {"Code": "G80", "Category": "Canned", "Function": "Cancel canned cycle"},
-      {"Code": "G83", "Category": "Canned", "Function": "Face drilling cycle"},
-      {"Code": "G84", "Category": "Canned", "Function": "Face Tapping cycle"},
+      {
+        "Code": "G74",
+        "Category": "Canned",
+        "Function": "Peck Drilling Cycle"
+      },
+      {
+        "Code": "G75",
+        "Category": "Canned",
+        "Function": "Grooving Cycle"
+      },
+      {
+        "Code": "G76",
+        "Category": "Canned",
+        "Function": "Threading Cycle"
+      },
+      {
+        "Code": "G80",
+        "Category": "Canned",
+        "Function": "Cancel canned cycle"
+      },
+      {
+        "Code": "G83",
+        "Category": "Canned",
+        "Function": "Face drilling cycle"
+      },
+      {
+        "Code": "G84",
+        "Category": "Canned",
+        "Function": "Face Tapping cycle"
+      },
       {
         "Code": "G86",
         "Category": "Canned",
         "Function": "Boring canned cycle, spindle stop, rapid out"
       },
-      {"Code": "G87", "Category": "Canned", "Function": "Side Drilling Cycle"},
-      {"Code": "G88", "Category": "Canned", "Function": "Side Tapping Cycle"},
-      {"Code": "G89", "Category": "Canned", "Function": "Side Boring Cycle"},
+      {
+        "Code": "G87",
+        "Category": "Canned",
+        "Function": "Side Drilling Cycle"
+      },
+      {
+        "Code": "G88",
+        "Category": "Canned",
+        "Function": "Side Tapping Cycle"
+      },
+      {
+        "Code": "G89",
+        "Category": "Canned",
+        "Function": "Side Boring Cycle"
+      },
       {
         "Code": "G90",
         "Category": "Coordinate",
@@ -294,7 +391,11 @@ class GTurning extends StatelessWidget {
         "Category": "Motion",
         "Function": "Constant Surface Speed Cancel"
       },
-      {"Code": "G98", "Category": "Motion", "Function": "Feedrate per Minute"},
+      {
+        "Code": "G98",
+        "Category": "Motion",
+        "Function": "Feedrate per Minute"
+      },
       {
         "Code": "G99",
         "Category": "Motion",
@@ -305,13 +406,19 @@ class GTurning extends StatelessWidget {
     return data.map((row) {
       return DataRow(cells: [
         DataCell(Wrap(
-          children: [Text(row['Code']!, style: textStyle)],
+          children: [
+            Text(row['Code']!, style: textStyle)
+          ],
         )),
         DataCell(Wrap(
-          children: [Text(row['Category']!, style: textStyle)],
+          children: [
+            Text(row['Category']!, style: textStyle)
+          ],
         )),
         DataCell(Wrap(
-          children: [Text(row['Function']!, style: textStyle)],
+          children: [
+            Text(row['Function']!, style: textStyle)
+          ],
         )),
       ]);
     }).toList();
